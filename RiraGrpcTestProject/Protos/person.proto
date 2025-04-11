@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "RiragRPCTestProject.Protos";
+
+service PersonService {
+  rpc CreatePerson (Person) returns (PersonResponse);
+  rpc GetPerson (PersonIdRequest) returns (Person);
+  rpc GetAllPeople (Empty) returns (PersonList);
+  rpc UpdatePerson (Person) returns (PersonResponse);
+  rpc DeletePerson (PersonIdRequest) returns (PersonResponse);
+}
+
+message Person {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string national_code= 4;
+  google.protobuf.Timestamp birth_date = 5;
+}
+
+message PersonIdRequest {
+  int32 id = 1;
+}
+
+message PersonResponse {
+  string message = 1;
+  bool success = 2;
+}
+
+message PersonList {
+  repeated Person people = 1;
+}
+
+message Empty {
+}
